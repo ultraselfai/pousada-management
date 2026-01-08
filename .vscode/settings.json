@@ -1,0 +1,4 @@
+{
+    "prisma.pinToPrisma6": false,
+    "npm.packageManager": "pnpm"
+}

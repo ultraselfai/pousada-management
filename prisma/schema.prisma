@@ -1,0 +1,192 @@
+// Decode Console - Prisma Schema
+// Documentação: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================
+// MODELOS BASE (Preparados para Better-Auth)
+// ============================================
+// O Better-Auth vai adicionar/modificar estes modelos
+// quando executarmos a CLI dele. Por enquanto, criamos
+// apenas a estrutura base de Organization para multi-tenancy.
+
+/// Organização (Tenant) - Base para multi-tenancy
+
+model Organization {
+  id              String   @id @default(cuid())
+  name            String
+  slug            String   @unique /// Slug da URL do tenant (ex: "acme" -> decode.app/acme)
+  logo            String? /// URL do logo no R2
+  metadata        Json? /// Configurações extras do tenant
+  allowedFeatures String[] @default([]) /// Features ativas para esta organização (DEC-19)
+  isSandbox       Boolean  @default(false) /// Se true, é o Decode Lab (acesso a features dev)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relações serão adicionadas pelo Better-Auth
+  // members     Member[]
+  // invitations Invitation[]
+
+  members     Member[]
+  invitations Invitation[]
+  projects    Project[] /// Projetos de formulários desta organização (DEC-28)
+
+  @@map("organizations")
+}
+
+model User {
+  id               String       @id
+  name             String
+  email            String
+  emailVerified    Boolean      @default(false)
+  image            String?
+  role             String       @default("user") /// Role do usuário: 'admin' | 'user'
+  banned           Boolean      @default(false) /// Se o usuário está banido
+  banReason        String?      /// Razão do banimento
+  banExpiresAt     DateTime?    /// Quando o banimento expira
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  twoFactorEnabled Boolean?     @default(false)
+  sessions         Session[]
+  accounts         Account[]
+  members          Member[]
+  invitations      Invitation[]
+  twofactors       TwoFactor[]
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id                   String   @id
+  expiresAt            DateTime
+  token                String
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  ipAddress            String?
+  userAgent            String?
+  userId               String
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  activeOrganizationId String?
+  impersonatedBy       String?  /// ID do admin que está impersonando este usuário
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+model Member {
+  id             String       @id
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role           String       @default("member")
+  createdAt      DateTime
+
+  @@index([organizationId])
+  @@index([userId])
+  @@map("member")
+}
+
+model Invitation {
+  id             String       @id
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  email          String
+  role           String?
+  status         String       @default("pending")
+  expiresAt      DateTime
+  createdAt      DateTime     @default(now())
+  inviterId      String
+  user           User         @relation(fields: [inviterId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId])
+  @@index([email])
+  @@map("invitation")
+}
+
+model TwoFactor {
+  id          String @id
+  secret      String
+  backupCodes String
+  userId      String
+  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([secret])
+  @@index([userId])
+  @@map("twoFactor")
+}
+
+// ============================================
+// MODELOS DE PROJECTS (DEC-28)
+// ============================================
+// Sistema de formulários customizados para o Decode Lab
+
+/// Projeto de Formulário - Cada projeto tem um slug único e formulário hardcoded
+model Project {
+  id             String       @id @default(cuid())
+  name           String /// Nome do projeto/formulário
+  slug           String       @unique /// Slug único para a URL pública (/forms/[slug])
+  description    String? /// Descrição opcional do projeto
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  submissions    Submission[]
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([organizationId])
+  @@map("projects")
+}
+
+/// Submissão de Formulário - Armazena as respostas enviadas
+model Submission {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  data      Json /// Payload completo do formulário (flexível para qualquer estrutura)
+  viewed    Boolean  @default(false) /// Se a resposta já foi visualizada
+  createdAt DateTime @default(now())
+
+  @@index([projectId])
+  @@map("submissions")
+}

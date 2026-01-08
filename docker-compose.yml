@@ -1,0 +1,56 @@
+# Docker Compose - Decode Console
+# Ambiente de desenvolvimento local
+#
+# Uso:
+#   docker-compose up -d      # Inicia os serviços em background
+#   docker-compose down       # Para os serviços
+#   docker-compose logs -f    # Visualiza logs em tempo real
+#   docker-compose down -v    # Para e remove volumes (reset completo)
+
+services:
+  # PostgreSQL 17 - Banco de dados principal
+  postgres:
+    image: postgres:17-alpine
+    container_name: decode-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-decode}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-decode_secret}
+      POSTGRES_DB: ${POSTGRES_DB:-decode_console}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-decode} -d ${POSTGRES_DB:-decode_console}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis - Cache e sessões (preparado para futuro uso)
+  redis:
+    image: redis:7-alpine
+    container_name: decode-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+# Volumes persistentes
+volumes:
+  postgres_data:
+    name: decode_postgres_data
+  redis_data:
+    name: decode_redis_data
+
+# Network opcional (os serviços já compartilham a rede default)
+networks:
+  default:
+    name: decode_network
