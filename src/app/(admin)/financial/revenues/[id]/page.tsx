@@ -107,7 +107,7 @@ export default function RevenueDetailsPage({ params }: Props) {
         setRevenue({
           ...revenue,
           description: formData.description,
-          source: formData.source,
+          source: formData.source as "BOOKING" | "EXTRA_SERVICE" | "PRODUCT_SALE" | "OTHER",
           amount: parseCurrencyToNumber(formData.amount),
           notes: formData.notes,
         })

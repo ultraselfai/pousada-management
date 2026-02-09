@@ -35,6 +35,8 @@ export default function NewQuotePage() {
     basePrice: "",
     discount: "0",
     discountType: "PERCENTAGE" as "PERCENTAGE" | "FIXED",
+    adults: 1,
+    children: 0,
     notes: "",
   })
 
@@ -56,6 +58,8 @@ export default function NewQuotePage() {
         basePrice: parseCurrencyToNumber(formData.basePrice),
         discount: formData.discountType === "FIXED" ? parseCurrencyToNumber(formData.discount) : (Number(formData.discount) || 0),
         discountType: formData.discountType,
+        adults: Number(formData.adults),
+        children: Number(formData.children),
         notes: formData.notes || undefined,
         validUntil: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 dias
       })
@@ -201,6 +205,30 @@ export default function NewQuotePage() {
                       required
                     />
                   </div>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="adults">Adultos</Label>
+                  <Input
+                    id="adults"
+                    type="number"
+                    min={1}
+                    value={formData.adults}
+                    onChange={(e) => setFormData({ ...formData, adults: parseInt(e.target.value) || 0 })}
+                    required
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="children">Crianças</Label>
+                  <Input
+                    id="children"
+                    type="number"
+                    min={0}
+                    value={formData.children}
+                    onChange={(e) => setFormData({ ...formData, children: parseInt(e.target.value) || 0 })}
+                    required
+                  />
                 </div>
               </div>
               {nights > 0 && (

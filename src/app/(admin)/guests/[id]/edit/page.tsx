@@ -74,6 +74,7 @@ export default function EditGuestPage({ params }: Props) {
         email: formData.email || undefined,
         phone: formData.phone || undefined,
         cpf: formData.cpf || undefined,
+        birthDate: null,
         notes: formData.notes || undefined,
       })
 
