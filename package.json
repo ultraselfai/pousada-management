@@ -53,6 +53,8 @@
     "@smithy/protocol-http": "^5.3.5",
     "@tailwindcss/postcss": "^4.1.12",
     "@tanstack/react-table": "^8.21.3",
+    "@types/bcryptjs": "^3.0.0",
+    "bcryptjs": "^3.0.3",
     "better-auth": "^1.4.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
