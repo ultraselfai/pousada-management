@@ -26,8 +26,16 @@ export const auth = betterAuth({
   // Autenticação por email/senha habilitada
   emailAndPassword: {
     enabled: true,
-    // TODO: Configurar envio de email de verificação
-    // sendResetPassword: async ({ user, url }) => { ... },
+  },
+
+  user: {
+    additionalFields: {
+      permissions: {
+        type: "string[]",
+        required: false,
+        defaultValue: []
+      }
+    }
   },
 
   // Plugins
@@ -79,6 +87,19 @@ export const auth = betterAuth({
     // Integração com Next.js (deve ser o último plugin)
     nextCookies(),
   ],
+
+  callbacks: {
+    session: async ({ session, user }: { session: any, user: any }) => {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          permissions: (user as any).permissions,
+          role: (user as any).role // Ensure role is also passed if needed (admin plugin usually handles, but safe to add)
+        },
+      };
+    },
+  },
 
   // Configurações de sessão
   session: {

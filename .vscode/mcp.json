@@ -68,6 +68,18 @@
 				"mcp"
 			],
 			"env": {}
+		},
+		"coolify": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"@masonator/coolify-mcp"
+			],
+			"env": {
+				"COOLIFY_ACCESS_TOKEN": "2|kNXTmsyKBbUSeQ81DaAjF3gKyBnckyCSmQI2aszM537a28ae",
+				"COOLIFY_BASE_URL": "https://coolify.decode.ink"
+			}
 		}
 	},
 	"inputs": [

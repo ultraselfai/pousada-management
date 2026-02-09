@@ -53,9 +53,10 @@ export function AdminLoginForm({
       }
 
       const user = session.data.user as { role?: string }
-      if (user.role !== "admin" && user.role !== "owner") {
+      // Permitir admin, owner e user (staff com permissões)
+      if (user.role !== "admin" && user.role !== "owner" && user.role !== "user") {
         await authClient.signOut()
-        setError("Acesso negado. Esta área é restrita a administradores.")
+        setError("Acesso negado. Role não autorizada.")
         return
       }
 

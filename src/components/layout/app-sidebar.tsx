@@ -183,6 +183,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     if (user.role === "admin" || user.role === "owner") return data.navGroups
 
     const userPermissions = (user as any).permissions || []
+    console.log("Sidebar User:", user.email, "| Role:", user.role, "| Permissions:", userPermissions);
 
     return data.navGroups.filter(group => {
       // Mapping
