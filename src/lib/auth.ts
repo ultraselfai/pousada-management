@@ -118,12 +118,12 @@ export const auth = betterAuth({
   baseURL: process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_APP_URL,
   
   // Origens confiáveis para requests de auth
-  // Permite que tanto console.decode.ink quanto app.decode.ink façam auth
   trustedOrigins: [
-    "https://app.decode.ink",
-    "https://console.decode.ink",
-    // Wildcards para subdomínios de tenants
-    "https://*.decode.ink",
+    "https://pousadadoiscoracoes.com.br",
+    "https://console.pousadadoiscoracoes.com.br",
+    "https://reservas.pousadadoiscoracoes.com.br",
+    // Wildcards para subdomínios
+    "https://*.pousadadoiscoracoes.com.br",
     // Desenvolvimento local
     "http://localhost:3000",
     "http://localhost:3001",
@@ -133,15 +133,15 @@ export const auth = betterAuth({
   // Permite que o cookie de sessão seja compartilhado entre subdomínios
   advanced: {
     // Define o domínio do cookie para permitir compartilhamento entre subdomínios
-    // Em produção: .decode.ink (permite app.decode.ink e console.decode.ink)
+    // Em produção: .pousadadoiscoracoes.com.br
     // Em desenvolvimento: não define domínio (localhost funciona automaticamente)
-    cookieDomain: process.env.NODE_ENV === "production" ? ".decode.ink" : undefined,
+    cookieDomain: process.env.NODE_ENV === "production" ? ".pousadadoiscoracoes.com.br" : undefined,
     // Usa secure cookies em produção
     useSecureCookies: process.env.NODE_ENV === "production",
     // Cross-site cookies para funcionar com diferentes origens
     crossSubDomainCookies: {
       enabled: true,
-      domain: process.env.NODE_ENV === "production" ? ".decode.ink" : undefined,
+      domain: process.env.NODE_ENV === "production" ? ".pousadadoiscoracoes.com.br" : undefined,
     },
   },
 });
