@@ -1,0 +1,1830 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-01-30T03:21:02.413Z",
+  "stack": {
+    "primaryLanguage": "typescript",
+    "languages": [
+      "javascript",
+      "typescript"
+    ],
+    "frameworks": [
+      "nextjs"
+    ],
+    "buildTools": [
+      "docker-compose"
+    ],
+    "testFrameworks": [],
+    "packageManager": "pnpm",
+    "isMonorepo": false,
+    "hasDocker": true,
+    "hasCI": true
+  },
+  "structure": {
+    "totalFiles": 455,
+    "topDirectories": [
+      {
+        "name": "components.json",
+        "fileCount": 1
+      },
+      {
+        "name": "design-system-reference.md",
+        "fileCount": 1
+      },
+      {
+        "name": "docker-compose.yml",
+        "fileCount": 1
+      },
+      {
+        "name": "docs",
+        "fileCount": 37
+      },
+      {
+        "name": "eslint.config.mjs",
+        "fileCount": 1
+      },
+      {
+        "name": "License.md",
+        "fileCount": 1
+      },
+      {
+        "name": "next-env.d.ts",
+        "fileCount": 1
+      },
+      {
+        "name": "next.config.ts",
+        "fileCount": 1
+      },
+      {
+        "name": "nixpacks.toml",
+        "fileCount": 1
+      },
+      {
+        "name": "package.json",
+        "fileCount": 1
+      },
+      {
+        "name": "pnpm-lock.yaml",
+        "fileCount": 1
+      },
+      {
+        "name": "postcss.config.mjs",
+        "fileCount": 1
+      },
+      {
+        "name": "prisma",
+        "fileCount": 9
+      },
+      {
+        "name": "prisma.config.ts",
+        "fileCount": 1
+      },
+      {
+        "name": "public",
+        "fileCount": 43
+      },
+      {
+        "name": "README.md",
+        "fileCount": 1
+      },
+      {
+        "name": "src",
+        "fileCount": 351
+      },
+      {
+        "name": "test-results",
+        "fileCount": 0
+      },
+      {
+        "name": "tsconfig.json",
+        "fileCount": 1
+      },
+      {
+        "name": "tsconfig.tsbuildinfo",
+        "fileCount": 1
+      }
+    ],
+    "languageDistribution": [
+      {
+        "extension": ".tsx",
+        "count": 256
+      },
+      {
+        "extension": ".ts",
+        "count": 75
+      },
+      {
+        "extension": ".md",
+        "count": 36
+      },
+      {
+        "extension": ".json",
+        "count": 23
+      },
+      {
+        "extension": ".png",
+        "count": 20
+      },
+      {
+        "extension": ".jpg",
+        "count": 16
+      },
+      {
+        "extension": ".svg",
+        "count": 7
+      },
+      {
+        "extension": ".sql",
+        "count": 6
+      },
+      {
+        "extension": ".jpeg",
+        "count": 3
+      },
+      {
+        "extension": ".mjs",
+        "count": 2
+      }
+    ]
+  },
+  "architecture": {
+    "layers": [
+      {
+        "name": "Config",
+        "description": "Configuration and constants",
+        "directories": [
+          ".",
+          "src\\hooks",
+          "src\\config"
+        ],
+        "symbolCount": 10,
+        "dependsOn": []
+      },
+      {
+        "name": "Utils",
+        "description": "Shared utilities and helpers",
+        "directories": [
+          "src\\utils",
+          "src\\lib",
+          "src\\generated\\prisma"
+        ],
+        "symbolCount": 76,
+        "dependsOn": [
+          "Models"
+        ]
+      },
+      {
+        "name": "Models",
+        "description": "Data structures and domain objects",
+        "directories": [
+          "src\\lib",
+          "src\\generated\\prisma",
+          "src\\features\\projects",
+          "src\\features\\auth",
+          "src\\generated\\prisma\\models",
+          "src\\app\\(admin)\\tasks\\data",
+          "src\\app\\(admin)\\dashboard\\schemas"
+        ],
+        "symbolCount": 10,
+        "dependsOn": []
+      },
+      {
+        "name": "Components",
+        "description": "UI components and views",
+        "directories": [
+          "src\\hooks",
+          "src\\components",
+          "src\\components\\layout",
+          "src\\app\\(public)\\forms\\[slug]\\components\\forms\\briefing-cilene-nunes",
+          "src\\app\\(public)\\forms\\[slug]\\components\\forms\\briefing-cilene-nunes\\steps",
+          "src\\app",
+          "src\\components\\website",
+          "src\\components\\ui",
+          "src\\components\\theme-customizer",
+          "src\\components\\landing",
+          "src\\components\\booking",
+          "src\\app\\landing",
+          "src\\app\\admin-login",
+          "src\\_disabled-multi-tenant\\(auth)\\sign-up-3",
+          "src\\_disabled-multi-tenant\\(auth)\\sign-up-2",
+          "src\\_disabled-multi-tenant\\(auth)\\sign-up",
+          "src\\_disabled-multi-tenant\\(auth)\\sign-in-3",
+          "src\\_disabled-multi-tenant\\(auth)\\sign-in-2",
+          "src\\_disabled-multi-tenant\\(auth)\\sign-in",
+          "src\\_disabled-multi-tenant\\(auth)\\onboarding",
+          "src\\_disabled-multi-tenant\\(auth)\\login",
+          "src\\_disabled-multi-tenant\\(auth)\\forgot-password-3",
+          "src\\_disabled-multi-tenant\\(auth)\\forgot-password-2",
+          "src\\_disabled-multi-tenant\\(auth)\\forgot-password",
+          "src\\_disabled-multi-tenant\\(auth)\\admin-login",
+          "src\\_disabled-multi-tenant\\(app)\\[tenantId]",
+          "src\\features\\upload\\components",
+          "src\\app\\landing\\components",
+          "src\\app\\admin-login\\components",
+          "src\\app\\(website)\\contato",
+          "src\\app\\(admin)\\upload-test",
+          "src\\app\\(admin)\\tasks",
+          "src\\app\\(admin)\\pricing",
+          "src\\app\\(admin)\\organizations",
+          "src\\app\\(admin)\\mail",
+          "src\\app\\(admin)\\gerador-de-reservas",
+          "src\\app\\(admin)\\faqs",
+          "src\\app\\(admin)\\dashboard-2",
+          "src\\app\\(admin)\\dashboard",
+          "src\\app\\(admin)\\chat",
+          "src\\app\\(admin)\\calendar",
+          "src\\_disabled-multi-tenant\\(auth)\\sign-up-3\\components",
+          "src\\_disabled-multi-tenant\\(auth)\\sign-up-2\\components",
+          "src\\_disabled-multi-tenant\\(auth)\\sign-up\\components",
+          "src\\_disabled-multi-tenant\\(auth)\\sign-in-3\\components",
+          "src\\_disabled-multi-tenant\\(auth)\\sign-in-2\\components",
+          "src\\_disabled-multi-tenant\\(auth)\\sign-in\\components",
+          "src\\_disabled-multi-tenant\\(auth)\\onboarding\\components",
+          "src\\_disabled-multi-tenant\\(auth)\\login\\components",
+          "src\\_disabled-multi-tenant\\(auth)\\forgot-password-3\\components",
+          "src\\_disabled-multi-tenant\\(auth)\\forgot-password-2\\components",
+          "src\\_disabled-multi-tenant\\(auth)\\forgot-password\\components",
+          "src\\_disabled-multi-tenant\\(auth)\\errors\\under-maintenance",
+          "src\\_disabled-multi-tenant\\(auth)\\errors\\unauthorized",
+          "src\\_disabled-multi-tenant\\(auth)\\errors\\not-found",
+          "src\\_disabled-multi-tenant\\(auth)\\errors\\internal-server-error",
+          "src\\_disabled-multi-tenant\\(auth)\\errors\\forbidden",
+          "src\\_disabled-multi-tenant\\(auth)\\admin-login\\components",
+          "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\users",
+          "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\upload",
+          "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\tasks",
+          "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\settings",
+          "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\projects",
+          "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\mail",
+          "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\financeiro",
+          "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\dashboard",
+          "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\chat",
+          "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\calendar",
+          "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\analytics",
+          "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\ai",
+          "src\\app\\(public)\\forms\\[slug]",
+          "src\\app\\(admin)\\tasks\\components",
+          "src\\app\\(admin)\\settings\\user",
+          "src\\app\\(admin)\\settings\\connections",
+          "src\\app\\(admin)\\settings\\notifications",
+          "src\\app\\(admin)\\settings\\billing",
+          "src\\app\\(admin)\\settings\\appearance",
+          "src\\app\\(admin)\\settings\\account",
+          "src\\app\\(admin)\\pricing\\components",
+          "src\\app\\(admin)\\organizations\\[id]",
+          "src\\app\\(admin)\\organizations\\components",
+          "src\\app\\(admin)\\mail\\components",
+          "src\\app\\(admin)\\faqs\\components",
+          "src\\app\\(admin)\\dashboard-2\\components",
+          "src\\app\\(admin)\\dashboard\\components",
+          "src\\app\\(admin)\\chat\\components",
+          "src\\app\\(admin)\\calendar\\components",
+          "src\\_disabled-multi-tenant\\(auth)\\errors\\under-maintenance\\components",
+          "src\\_disabled-multi-tenant\\(auth)\\errors\\unauthorized\\components",
+          "src\\_disabled-multi-tenant\\(auth)\\errors\\not-found\\components",
+          "src\\_disabled-multi-tenant\\(auth)\\errors\\internal-server-error\\components",
+          "src\\_disabled-multi-tenant\\(auth)\\errors\\forbidden\\components",
+          "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\projects\\components",
+          "src\\app\\(public)\\forms\\[slug]\\components",
+          "src\\app\\(admin)\\settings\\billing\\components",
+          "src\\app\\(admin)\\organizations\\[id]\\components",
+          "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\projects\\[projectId]\\responses",
+          "src\\app\\(public)\\forms\\[slug]\\components\\forms",
+          "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\projects\\[projectId]\\responses\\components"
+        ],
+        "symbolCount": 307,
+        "dependsOn": [
+          "Repositories"
+        ]
+      },
+      {
+        "name": "Repositories",
+        "description": "Data access and persistence",
+        "directories": [
+          "src\\config",
+          "src\\app\\(admin)\\calendar",
+          "src\\app\\(admin)\\mail",
+          "src\\app\\(admin)\\tasks\\data",
+          "src\\app\\(admin)\\tasks\\components",
+          "src\\app\\(admin)\\organizations\\components",
+          "src\\app\\(admin)\\dashboard\\components"
+        ],
+        "symbolCount": 14,
+        "dependsOn": []
+      }
+    ],
+    "patterns": [],
+    "entryPoints": [
+      "src\\db\\index.ts",
+      "src\\features\\upload\\index.ts",
+      "src\\features\\projects\\index.ts",
+      "src\\features\\auth\\index.ts",
+      "src\\components\\layout\\index.ts",
+      "src\\app\\(public)\\forms\\[slug]\\components\\forms\\briefing-cilene-nunes\\steps\\index.ts",
+      "src\\components\\theme-customizer\\main.tsx",
+      "src\\components\\theme-customizer\\index.tsx",
+      "src\\app\\(admin)\\mail\\index.tsx",
+      "src\\app\\(public)\\forms\\[slug]\\components\\forms\\briefing-cilene-nunes\\index.tsx"
+    ]
+  },
+  "symbols": {
+    "classes": [],
+    "interfaces": [
+      {
+        "name": "ActionResult",
+        "kind": "interface",
+        "file": "src\\features\\admin\\client-actions.ts",
+        "line": 23,
+        "exported": true
+      },
+      {
+        "name": "AuthResult",
+        "kind": "interface",
+        "file": "src\\features\\auth\\types.ts",
+        "line": 31,
+        "exported": true
+      },
+      {
+        "name": "AuthState",
+        "kind": "interface",
+        "file": "src\\features\\auth\\types.ts",
+        "line": 23,
+        "exported": true
+      },
+      {
+        "name": "BrandColor",
+        "kind": "interface",
+        "file": "src\\types\\theme-customizer.ts",
+        "line": 37,
+        "exported": true
+      },
+      {
+        "name": "BriefingFormData",
+        "kind": "interface",
+        "file": "src\\app\\(public)\\forms\\[slug]\\components\\forms\\briefing-cilene-nunes\\types.ts",
+        "line": 5,
+        "exported": true
+      },
+      {
+        "name": "Calendar",
+        "kind": "interface",
+        "file": "src\\app\\(admin)\\calendar\\types.ts",
+        "line": 14,
+        "exported": true
+      },
+      {
+        "name": "CalendarEvent",
+        "kind": "interface",
+        "file": "src\\app\\(admin)\\calendar\\types.ts",
+        "line": 1,
+        "exported": true
+      },
+      {
+        "name": "ClientDetails",
+        "kind": "interface",
+        "file": "src\\features\\admin\\client-actions.ts",
+        "line": 29,
+        "exported": true
+      },
+      {
+        "name": "ColorTheme",
+        "kind": "interface",
+        "file": "src\\types\\theme-customizer.ts",
+        "line": 9,
+        "exported": true
+      },
+      {
+        "name": "Conversation",
+        "kind": "interface",
+        "file": "src\\app\\(admin)\\chat\\use-chat.ts",
+        "line": 31,
+        "exported": true
+      },
+      {
+        "name": "CreateClientInput",
+        "kind": "interface",
+        "file": "src\\features\\admin\\client-actions.ts",
+        "line": 56,
+        "exported": true
+      },
+      {
+        "name": "Feature",
+        "kind": "interface",
+        "file": "src\\config\\features.ts",
+        "line": 20,
+        "exported": true
+      },
+      {
+        "name": "FeatureAccessResult",
+        "kind": "interface",
+        "file": "src\\lib\\feature-access.ts",
+        "line": 23,
+        "exported": true
+      },
+      {
+        "name": "FormComponentProps",
+        "kind": "interface",
+        "file": "src\\app\\(public)\\forms\\[slug]\\components\\form-registry.tsx",
+        "line": 21,
+        "exported": true
+      },
+      {
+        "name": "ImportedTheme",
+        "kind": "interface",
+        "file": "src\\types\\theme-customizer.ts",
+        "line": 42,
+        "exported": true
+      },
+      {
+        "name": "Message",
+        "kind": "interface",
+        "file": "src\\app\\(admin)\\chat\\use-chat.ts",
+        "line": 16,
+        "exported": true
+      },
+      {
+        "name": "OrganizationData",
+        "kind": "interface",
+        "file": "src\\hooks\\use-organization.ts",
+        "line": 13,
+        "exported": true
+      },
+      {
+        "name": "OrganizationForFeatureCheck",
+        "kind": "interface",
+        "file": "src\\lib\\feature-access.ts",
+        "line": 17,
+        "exported": true
+      },
+      {
+        "name": "PricingPlan",
+        "kind": "interface",
+        "file": "src\\components\\pricing-plans.tsx",
+        "line": 9,
+        "exported": true
+      },
+      {
+        "name": "PrismaClient",
+        "kind": "interface",
+        "file": "src\\generated\\prisma\\internal\\class.ts",
+        "line": 90,
+        "exported": true
+      },
+      {
+        "name": "PrismaClientConstructor",
+        "kind": "interface",
+        "file": "src\\generated\\prisma\\internal\\class.ts",
+        "line": 53,
+        "exported": true
+      },
+      {
+        "name": "Project",
+        "kind": "interface",
+        "file": "src\\features\\projects\\types.ts",
+        "line": 11,
+        "exported": true
+      },
+      {
+        "name": "ProjectActionResult",
+        "kind": "interface",
+        "file": "src\\features\\projects\\types.ts",
+        "line": 67,
+        "exported": true
+      },
+      {
+        "name": "ProjectsListResult",
+        "kind": "interface",
+        "file": "src\\features\\projects\\types.ts",
+        "line": 59,
+        "exported": true
+      },
+      {
+        "name": "ProjectWithCount",
+        "kind": "interface",
+        "file": "src\\features\\projects\\types.ts",
+        "line": 35,
+        "exported": true
+      },
+      {
+        "name": "ProjectWithSubmissions",
+        "kind": "interface",
+        "file": "src\\features\\projects\\types.ts",
+        "line": 44,
+        "exported": true
+      },
+      {
+        "name": "RadiusOption",
+        "kind": "interface",
+        "file": "src\\types\\theme-customizer.ts",
+        "line": 32,
+        "exported": true
+      },
+      {
+        "name": "Session",
+        "kind": "interface",
+        "file": "src\\features\\auth\\types.ts",
+        "line": 17,
+        "exported": true
+      },
+      {
+        "name": "SidebarCollapsibleOption",
+        "kind": "interface",
+        "file": "src\\types\\theme-customizer.ts",
+        "line": 21,
+        "exported": true
+      },
+      {
+        "name": "SidebarConfig",
+        "kind": "interface",
+        "file": "src\\contexts\\sidebar-context.tsx",
+        "line": 5,
+        "exported": true
+      },
+      {
+        "name": "SidebarContextValue",
+        "kind": "interface",
+        "file": "src\\contexts\\sidebar-context.tsx",
+        "line": 11,
+        "exported": true
+      },
+      {
+        "name": "SidebarSideOption",
+        "kind": "interface",
+        "file": "src\\types\\theme-customizer.ts",
+        "line": 27,
+        "exported": true
+      },
+      {
+        "name": "SidebarVariant",
+        "kind": "interface",
+        "file": "src\\types\\theme-customizer.ts",
+        "line": 15,
+        "exported": true
+      },
+      {
+        "name": "StepConfig",
+        "kind": "interface",
+        "file": "src\\app\\(public)\\forms\\[slug]\\components\\forms\\briefing-cilene-nunes\\types.ts",
+        "line": 60,
+        "exported": true
+      },
+      {
+        "name": "Submission",
+        "kind": "interface",
+        "file": "src\\features\\projects\\types.ts",
+        "line": 24,
+        "exported": true
+      },
+      {
+        "name": "SubmissionActionResult",
+        "kind": "interface",
+        "file": "src\\features\\projects\\types.ts",
+        "line": 77,
+        "exported": true
+      },
+      {
+        "name": "SubmissionWithParsedData",
+        "kind": "interface",
+        "file": "src\\features\\projects\\types.ts",
+        "line": 51,
+        "exported": true
+      },
+      {
+        "name": "TenantData",
+        "kind": "interface",
+        "file": "src\\contexts\\tenant-context.tsx",
+        "line": 15,
+        "exported": true
+      },
+      {
+        "name": "ThemePreset",
+        "kind": "interface",
+        "file": "src\\types\\theme-customizer.ts",
+        "line": 1,
+        "exported": true
+      },
+      {
+        "name": "ToggleFeatureResult",
+        "kind": "interface",
+        "file": "src\\features\\admin\\actions.ts",
+        "line": 17,
+        "exported": true
+      },
+      {
+        "name": "UpdateClientInput",
+        "kind": "interface",
+        "file": "src\\features\\admin\\client-actions.ts",
+        "line": 65,
+        "exported": true
+      },
+      {
+        "name": "UpdateClientUserInput",
+        "kind": "interface",
+        "file": "src\\features\\admin\\client-actions.ts",
+        "line": 72,
+        "exported": true
+      },
+      {
+        "name": "UploadedFile",
+        "kind": "interface",
+        "file": "src\\features\\upload\\components\\file-upload.tsx",
+        "line": 12,
+        "exported": true
+      },
+      {
+        "name": "UploadedFileInfo",
+        "kind": "interface",
+        "file": "src\\app\\(public)\\forms\\[slug]\\components\\forms\\briefing-cilene-nunes\\types.ts",
+        "line": 52,
+        "exported": true
+      },
+      {
+        "name": "UseCalendarActions",
+        "kind": "interface",
+        "file": "src\\app\\(admin)\\calendar\\use-calendar.ts",
+        "line": 14,
+        "exported": true
+      },
+      {
+        "name": "UseCalendarReturn",
+        "kind": "interface",
+        "file": "src\\app\\(admin)\\calendar\\use-calendar.ts",
+        "line": 27,
+        "exported": true
+      },
+      {
+        "name": "UseCalendarState",
+        "kind": "interface",
+        "file": "src\\app\\(admin)\\calendar\\use-calendar.ts",
+        "line": 6,
+        "exported": true
+      },
+      {
+        "name": "User",
+        "kind": "interface",
+        "file": "src\\features\\auth\\types.ts",
+        "line": 8,
+        "exported": true
+      },
+      {
+        "name": "User",
+        "kind": "interface",
+        "file": "src\\app\\(admin)\\chat\\use-chat.ts",
+        "line": 5,
+        "exported": true
+      },
+      {
+        "name": "AccountSwitcherProps",
+        "kind": "interface",
+        "file": "src\\app\\(admin)\\mail\\components\\account-switcher.tsx",
+        "line": 14,
+        "exported": false
+      }
+    ],
+    "functions": [
+      {
+        "name": "AboutSection",
+        "kind": "function",
+        "file": "src\\components\\website\\about-section.tsx",
+        "line": 7,
+        "exported": true
+      },
+      {
+        "name": "addCustomAccommodation",
+        "kind": "function",
+        "file": "src\\lib\\booking-storage.ts",
+        "line": 56,
+        "exported": true
+      },
+      {
+        "name": "AdminLoginPage",
+        "kind": "function",
+        "file": "src\\app\\admin-login\\page.tsx",
+        "line": 9,
+        "exported": true
+      },
+      {
+        "name": "AdminLoginPage",
+        "kind": "function",
+        "file": "src\\_disabled-multi-tenant\\(auth)\\admin-login\\page.tsx",
+        "line": 9,
+        "exported": true
+      },
+      {
+        "name": "AdminOnly",
+        "kind": "function",
+        "file": "src\\components\\admin-only.tsx",
+        "line": 26,
+        "exported": true
+      },
+      {
+        "name": "AppTenantLayout",
+        "kind": "function",
+        "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\layout.tsx",
+        "line": 79,
+        "exported": true
+      },
+      {
+        "name": "AuthLayout",
+        "kind": "function",
+        "file": "src\\_disabled-multi-tenant\\(auth)\\layout.tsx",
+        "line": 8,
+        "exported": true
+      },
+      {
+        "name": "BillingHistoryCard",
+        "kind": "function",
+        "file": "src\\app\\(admin)\\settings\\billing\\components\\billing-history-card.tsx",
+        "line": 17,
+        "exported": true
+      },
+      {
+        "name": "BillingSettings",
+        "kind": "function",
+        "file": "src\\app\\(admin)\\settings\\billing\\page.tsx",
+        "line": 12,
+        "exported": true
+      },
+      {
+        "name": "BriefingCileneNunesForm",
+        "kind": "function",
+        "file": "src\\app\\(public)\\forms\\[slug]\\components\\forms\\briefing-cilene-nunes\\index.tsx",
+        "line": 39,
+        "exported": true
+      },
+      {
+        "name": "calculateDaysBetween",
+        "kind": "function",
+        "file": "src\\lib\\booking-storage.ts",
+        "line": 143,
+        "exported": true
+      },
+      {
+        "name": "Calendar",
+        "kind": "function",
+        "file": "src\\app\\(admin)\\calendar\\components\\calendar.tsx",
+        "line": 15,
+        "exported": true
+      },
+      {
+        "name": "CalendarPage",
+        "kind": "function",
+        "file": "src\\app\\(admin)\\calendar\\page.tsx",
+        "line": 4,
+        "exported": true
+      },
+      {
+        "name": "CalendarSidebar",
+        "kind": "function",
+        "file": "src\\app\\(admin)\\calendar\\components\\calendar-sidebar.tsx",
+        "line": 19,
+        "exported": true
+      },
+      {
+        "name": "ChatPage",
+        "kind": "function",
+        "file": "src\\app\\(admin)\\chat\\page.tsx",
+        "line": 13,
+        "exported": true
+      },
+      {
+        "name": "checkAdminAccess",
+        "kind": "function",
+        "file": "src\\lib\\admin-guard.ts",
+        "line": 39,
+        "exported": true
+      },
+      {
+        "name": "checkMultipleFeatures",
+        "kind": "function",
+        "file": "src\\lib\\feature-access.ts",
+        "line": 115,
+        "exported": true
+      },
+      {
+        "name": "ClientAnalyticsPage",
+        "kind": "function",
+        "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\analytics\\page.tsx",
+        "line": 14,
+        "exported": true
+      },
+      {
+        "name": "ClientCalendarPage",
+        "kind": "function",
+        "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\calendar\\page.tsx",
+        "line": 14,
+        "exported": true
+      },
+      {
+        "name": "ClientChatPage",
+        "kind": "function",
+        "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\chat\\page.tsx",
+        "line": 13,
+        "exported": true
+      },
+      {
+        "name": "ClientDashboardPage",
+        "kind": "function",
+        "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\dashboard\\page.tsx",
+        "line": 15,
+        "exported": true
+      },
+      {
+        "name": "ClientDetailsPage",
+        "kind": "function",
+        "file": "src\\app\\(admin)\\organizations\\[id]\\page.tsx",
+        "line": 92,
+        "exported": true
+      },
+      {
+        "name": "ClientFinanceiroPage",
+        "kind": "function",
+        "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\financeiro\\page.tsx",
+        "line": 14,
+        "exported": true
+      },
+      {
+        "name": "ClientLayoutWrapper",
+        "kind": "function",
+        "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\client-layout-wrapper.tsx",
+        "line": 28,
+        "exported": true
+      },
+      {
+        "name": "ClientMailPage",
+        "kind": "function",
+        "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\mail\\page.tsx",
+        "line": 13,
+        "exported": true
+      },
+      {
+        "name": "ClientSettingsPage",
+        "kind": "function",
+        "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\settings\\page.tsx",
+        "line": 13,
+        "exported": true
+      },
+      {
+        "name": "ClientsPage",
+        "kind": "function",
+        "file": "src\\app\\(admin)\\organizations\\page.tsx",
+        "line": 63,
+        "exported": true
+      },
+      {
+        "name": "ClientTasksPage",
+        "kind": "function",
+        "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\tasks\\page.tsx",
+        "line": 13,
+        "exported": true
+      },
+      {
+        "name": "ClientUsersPage",
+        "kind": "function",
+        "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\users\\page.tsx",
+        "line": 13,
+        "exported": true
+      },
+      {
+        "name": "cn",
+        "kind": "function",
+        "file": "src\\lib\\utils.ts",
+        "line": 8,
+        "exported": true
+      },
+      {
+        "name": "ColorPicker",
+        "kind": "function",
+        "file": "src\\components\\color-picker.tsx",
+        "line": 15,
+        "exported": true
+      },
+      {
+        "name": "confirmUpload",
+        "kind": "function",
+        "file": "src\\features\\upload\\actions.ts",
+        "line": 82,
+        "exported": true
+      },
+      {
+        "name": "ConnectionSettings",
+        "kind": "function",
+        "file": "src\\app\\(admin)\\settings\\connections\\page.tsx",
+        "line": 9,
+        "exported": true
+      },
+      {
+        "name": "ContatoPage",
+        "kind": "function",
+        "file": "src\\app\\(website)\\contato\\page.tsx",
+        "line": 1,
+        "exported": true
+      },
+      {
+        "name": "createClient",
+        "kind": "function",
+        "file": "src\\features\\admin\\client-actions.ts",
+        "line": 196,
+        "exported": true
+      },
+      {
+        "name": "createProject",
+        "kind": "function",
+        "file": "src\\features\\projects\\actions.ts",
+        "line": 33,
+        "exported": true
+      },
+      {
+        "name": "CTASection",
+        "kind": "function",
+        "file": "src\\app\\landing\\components\\cta-section.tsx",
+        "line": 8,
+        "exported": true
+      },
+      {
+        "name": "CurrentPlanCard",
+        "kind": "function",
+        "file": "src\\app\\(admin)\\settings\\billing\\components\\current-plan-card.tsx",
+        "line": 23,
+        "exported": true
+      },
+      {
+        "name": "Dashboard2",
+        "kind": "function",
+        "file": "src\\app\\(admin)\\dashboard-2\\page.tsx",
+        "line": 9,
+        "exported": true
+      },
+      {
+        "name": "DashboardHeader",
+        "kind": "function",
+        "file": "src\\app\\(admin)\\dashboard-2\\components\\dashboard-header.tsx",
+        "line": 11,
+        "exported": true
+      },
+      {
+        "name": "DatePicker",
+        "kind": "function",
+        "file": "src\\app\\(admin)\\calendar\\components\\date-picker.tsx",
+        "line": 12,
+        "exported": true
+      },
+      {
+        "name": "DefaultForm",
+        "kind": "function",
+        "file": "src\\app\\(public)\\forms\\[slug]\\components\\forms\\default-form.tsx",
+        "line": 18,
+        "exported": true
+      },
+      {
+        "name": "deleteClient",
+        "kind": "function",
+        "file": "src\\features\\admin\\client-actions.ts",
+        "line": 519,
+        "exported": true
+      },
+      {
+        "name": "deleteFile",
+        "kind": "function",
+        "file": "src\\lib\\r2.ts",
+        "line": 176,
+        "exported": true
+      },
+      {
+        "name": "deleteProject",
+        "kind": "function",
+        "file": "src\\features\\projects\\actions.ts",
+        "line": 203,
+        "exported": true
+      },
+      {
+        "name": "deleteSubmission",
+        "kind": "function",
+        "file": "src\\features\\projects\\actions.ts",
+        "line": 335,
+        "exported": true
+      },
+      {
+        "name": "DiscoverSection",
+        "kind": "function",
+        "file": "src\\components\\website\\discover-section.tsx",
+        "line": 7,
+        "exported": true
+      },
+      {
+        "name": "DotPattern",
+        "kind": "function",
+        "file": "src\\components\\dot-pattern.tsx",
+        "line": 12,
+        "exported": true
+      },
+      {
+        "name": "FAQSection",
+        "kind": "function",
+        "file": "src\\app\\(admin)\\pricing\\components\\faq-section.tsx",
+        "line": 14,
+        "exported": true
+      },
+      {
+        "name": "FAQsPage",
+        "kind": "function",
+        "file": "src\\app\\(admin)\\faqs\\page.tsx",
+        "line": 9,
+        "exported": true
+      }
+    ],
+    "types": [
+      {
+        "name": "Account",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\client.ts",
+        "line": 61,
+        "exported": true
+      },
+      {
+        "name": "Account",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\browser.ts",
+        "line": 39,
+        "exported": true
+      },
+      {
+        "name": "Account",
+        "kind": "type",
+        "file": "src\\app\\(admin)\\mail\\data.tsx",
+        "line": 215,
+        "exported": true
+      },
+      {
+        "name": "AccountScalarFieldEnum",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\internal\\prismaNamespaceBrowser.ts",
+        "line": 147,
+        "exported": true
+      },
+      {
+        "name": "AdminCheckResult",
+        "kind": "type",
+        "file": "src\\lib\\admin-guard.ts",
+        "line": 24,
+        "exported": true
+      },
+      {
+        "name": "Auth",
+        "kind": "type",
+        "file": "src\\lib\\auth.ts",
+        "line": 129,
+        "exported": true
+      },
+      {
+        "name": "AuthProvider",
+        "kind": "type",
+        "file": "src\\features\\auth\\types.ts",
+        "line": 29,
+        "exported": true
+      },
+      {
+        "name": "BookingReceiptFormData",
+        "kind": "type",
+        "file": "src\\lib\\booking-receipt-schema.ts",
+        "line": 56,
+        "exported": true
+      },
+      {
+        "name": "BoolFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 71,
+        "exported": true
+      },
+      {
+        "name": "BoolNullableFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 188,
+        "exported": true
+      },
+      {
+        "name": "BoolNullableWithAggregatesFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 207,
+        "exported": true
+      },
+      {
+        "name": "BoolWithAggregatesFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 155,
+        "exported": true
+      },
+      {
+        "name": "ChartConfig",
+        "kind": "type",
+        "file": "src\\components\\ui\\chart.tsx",
+        "line": 9,
+        "exported": true
+      },
+      {
+        "name": "Contact",
+        "kind": "type",
+        "file": "src\\app\\(admin)\\mail\\data.tsx",
+        "line": 300,
+        "exported": true
+      },
+      {
+        "name": "CreateProjectInput",
+        "kind": "type",
+        "file": "src\\features\\projects\\schemas.ts",
+        "line": 62,
+        "exported": true
+      },
+      {
+        "name": "DateTimeFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 76,
+        "exported": true
+      },
+      {
+        "name": "DateTimeNullableFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 177,
+        "exported": true
+      },
+      {
+        "name": "DateTimeNullableWithAggregatesFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 193,
+        "exported": true
+      },
+      {
+        "name": "DateTimeWithAggregatesFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 163,
+        "exported": true
+      },
+      {
+        "name": "FeatureStatus",
+        "kind": "type",
+        "file": "src\\config\\features.ts",
+        "line": 18,
+        "exported": true
+      },
+      {
+        "name": "ForgotPasswordInput",
+        "kind": "type",
+        "file": "src\\features\\auth\\schemas.ts",
+        "line": 41,
+        "exported": true
+      },
+      {
+        "name": "Invitation",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\client.ts",
+        "line": 76,
+        "exported": true
+      },
+      {
+        "name": "Invitation",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\browser.ts",
+        "line": 54,
+        "exported": true
+      },
+      {
+        "name": "InvitationScalarFieldEnum",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\internal\\prismaNamespaceBrowser.ts",
+        "line": 184,
+        "exported": true
+      },
+      {
+        "name": "JsonFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 215,
+        "exported": true
+      },
+      {
+        "name": "JsonFilterBase",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 222,
+        "exported": true
+      },
+      {
+        "name": "JsonNullableFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 47,
+        "exported": true
+      },
+      {
+        "name": "JsonNullableFilterBase",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 54,
+        "exported": true
+      },
+      {
+        "name": "JsonNullableWithAggregatesFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 128,
+        "exported": true
+      },
+      {
+        "name": "JsonNullableWithAggregatesFilterBase",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 135,
+        "exported": true
+      },
+      {
+        "name": "JsonNullValueFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\internal\\prismaNamespaceBrowser.ts",
+        "line": 258,
+        "exported": true
+      },
+      {
+        "name": "JsonNullValueInput",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\internal\\prismaNamespaceBrowser.ts",
+        "line": 241,
+        "exported": true
+      },
+      {
+        "name": "JsonWithAggregatesFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 239,
+        "exported": true
+      },
+      {
+        "name": "JsonWithAggregatesFilterBase",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 246,
+        "exported": true
+      },
+      {
+        "name": "LogOptions",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\internal\\class.ts",
+        "line": 50,
+        "exported": true
+      },
+      {
+        "name": "Mail",
+        "kind": "type",
+        "file": "src\\app\\(admin)\\mail\\data.tsx",
+        "line": 174,
+        "exported": true
+      },
+      {
+        "name": "Member",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\client.ts",
+        "line": 71,
+        "exported": true
+      },
+      {
+        "name": "Member",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\browser.ts",
+        "line": 49,
+        "exported": true
+      },
+      {
+        "name": "MemberScalarFieldEnum",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\internal\\prismaNamespaceBrowser.ts",
+        "line": 170,
+        "exported": true
+      },
+      {
+        "name": "ModelName",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\internal\\prismaNamespaceBrowser.ts",
+        "line": 66,
+        "exported": true
+      },
+      {
+        "name": "NestedBoolFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 294,
+        "exported": true
+      },
+      {
+        "name": "NestedBoolNullableFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 423,
+        "exported": true
+      },
+      {
+        "name": "NestedBoolNullableWithAggregatesFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 442,
+        "exported": true
+      },
+      {
+        "name": "NestedBoolWithAggregatesFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 390,
+        "exported": true
+      },
+      {
+        "name": "NestedDateTimeFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 299,
+        "exported": true
+      },
+      {
+        "name": "NestedDateTimeNullableFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 412,
+        "exported": true
+      },
+      {
+        "name": "NestedDateTimeNullableWithAggregatesFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 428,
+        "exported": true
+      },
+      {
+        "name": "NestedDateTimeWithAggregatesFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 398,
+        "exported": true
+      },
+      {
+        "name": "NestedIntFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 327,
+        "exported": true
+      },
+      {
+        "name": "NestedIntNullableFilter",
+        "kind": "type",
+        "file": "src\\generated\\prisma\\commonInputTypes.ts",
+        "line": 355,
+        "exported": true
+      }
+    ],
+    "enums": []
+  },
+  "publicAPI": [
+    {
+      "name": "AboutSection",
+      "kind": "function",
+      "file": "src\\components\\website\\about-section.tsx",
+      "line": 7,
+      "exported": true
+    },
+    {
+      "name": "Account",
+      "kind": "type",
+      "file": "src\\generated\\prisma\\client.ts",
+      "line": 61,
+      "exported": true
+    },
+    {
+      "name": "Account",
+      "kind": "type",
+      "file": "src\\generated\\prisma\\browser.ts",
+      "line": 39,
+      "exported": true
+    },
+    {
+      "name": "Account",
+      "kind": "type",
+      "file": "src\\app\\(admin)\\mail\\data.tsx",
+      "line": 215,
+      "exported": true
+    },
+    {
+      "name": "AccountScalarFieldEnum",
+      "kind": "type",
+      "file": "src\\generated\\prisma\\internal\\prismaNamespaceBrowser.ts",
+      "line": 147,
+      "exported": true
+    },
+    {
+      "name": "ActionResult",
+      "kind": "interface",
+      "file": "src\\features\\admin\\client-actions.ts",
+      "line": 23,
+      "exported": true
+    },
+    {
+      "name": "addCustomAccommodation",
+      "kind": "function",
+      "file": "src\\lib\\booking-storage.ts",
+      "line": 56,
+      "exported": true
+    },
+    {
+      "name": "AdminCheckResult",
+      "kind": "type",
+      "file": "src\\lib\\admin-guard.ts",
+      "line": 24,
+      "exported": true
+    },
+    {
+      "name": "AdminLoginPage",
+      "kind": "function",
+      "file": "src\\app\\admin-login\\page.tsx",
+      "line": 9,
+      "exported": true
+    },
+    {
+      "name": "AdminLoginPage",
+      "kind": "function",
+      "file": "src\\_disabled-multi-tenant\\(auth)\\admin-login\\page.tsx",
+      "line": 9,
+      "exported": true
+    },
+    {
+      "name": "AdminOnly",
+      "kind": "function",
+      "file": "src\\components\\admin-only.tsx",
+      "line": 26,
+      "exported": true
+    },
+    {
+      "name": "AppTenantLayout",
+      "kind": "function",
+      "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\layout.tsx",
+      "line": 79,
+      "exported": true
+    },
+    {
+      "name": "Auth",
+      "kind": "type",
+      "file": "src\\lib\\auth.ts",
+      "line": 129,
+      "exported": true
+    },
+    {
+      "name": "AuthLayout",
+      "kind": "function",
+      "file": "src\\_disabled-multi-tenant\\(auth)\\layout.tsx",
+      "line": 8,
+      "exported": true
+    },
+    {
+      "name": "AuthProvider",
+      "kind": "type",
+      "file": "src\\features\\auth\\types.ts",
+      "line": 29,
+      "exported": true
+    },
+    {
+      "name": "AuthResult",
+      "kind": "interface",
+      "file": "src\\features\\auth\\types.ts",
+      "line": 31,
+      "exported": true
+    },
+    {
+      "name": "AuthState",
+      "kind": "interface",
+      "file": "src\\features\\auth\\types.ts",
+      "line": 23,
+      "exported": true
+    },
+    {
+      "name": "BillingHistoryCard",
+      "kind": "function",
+      "file": "src\\app\\(admin)\\settings\\billing\\components\\billing-history-card.tsx",
+      "line": 17,
+      "exported": true
+    },
+    {
+      "name": "BillingSettings",
+      "kind": "function",
+      "file": "src\\app\\(admin)\\settings\\billing\\page.tsx",
+      "line": 12,
+      "exported": true
+    },
+    {
+      "name": "BookingReceiptFormData",
+      "kind": "type",
+      "file": "src\\lib\\booking-receipt-schema.ts",
+      "line": 56,
+      "exported": true
+    },
+    {
+      "name": "BoolFilter",
+      "kind": "type",
+      "file": "src\\generated\\prisma\\commonInputTypes.ts",
+      "line": 71,
+      "exported": true
+    },
+    {
+      "name": "BoolNullableFilter",
+      "kind": "type",
+      "file": "src\\generated\\prisma\\commonInputTypes.ts",
+      "line": 188,
+      "exported": true
+    },
+    {
+      "name": "BoolNullableWithAggregatesFilter",
+      "kind": "type",
+      "file": "src\\generated\\prisma\\commonInputTypes.ts",
+      "line": 207,
+      "exported": true
+    },
+    {
+      "name": "BoolWithAggregatesFilter",
+      "kind": "type",
+      "file": "src\\generated\\prisma\\commonInputTypes.ts",
+      "line": 155,
+      "exported": true
+    },
+    {
+      "name": "BrandColor",
+      "kind": "interface",
+      "file": "src\\types\\theme-customizer.ts",
+      "line": 37,
+      "exported": true
+    },
+    {
+      "name": "BriefingCileneNunesForm",
+      "kind": "function",
+      "file": "src\\app\\(public)\\forms\\[slug]\\components\\forms\\briefing-cilene-nunes\\index.tsx",
+      "line": 39,
+      "exported": true
+    },
+    {
+      "name": "BriefingFormData",
+      "kind": "interface",
+      "file": "src\\app\\(public)\\forms\\[slug]\\components\\forms\\briefing-cilene-nunes\\types.ts",
+      "line": 5,
+      "exported": true
+    },
+    {
+      "name": "calculateDaysBetween",
+      "kind": "function",
+      "file": "src\\lib\\booking-storage.ts",
+      "line": 143,
+      "exported": true
+    },
+    {
+      "name": "Calendar",
+      "kind": "interface",
+      "file": "src\\app\\(admin)\\calendar\\types.ts",
+      "line": 14,
+      "exported": true
+    },
+    {
+      "name": "Calendar",
+      "kind": "function",
+      "file": "src\\app\\(admin)\\calendar\\components\\calendar.tsx",
+      "line": 15,
+      "exported": true
+    },
+    {
+      "name": "CalendarEvent",
+      "kind": "interface",
+      "file": "src\\app\\(admin)\\calendar\\types.ts",
+      "line": 1,
+      "exported": true
+    },
+    {
+      "name": "CalendarPage",
+      "kind": "function",
+      "file": "src\\app\\(admin)\\calendar\\page.tsx",
+      "line": 4,
+      "exported": true
+    },
+    {
+      "name": "CalendarSidebar",
+      "kind": "function",
+      "file": "src\\app\\(admin)\\calendar\\components\\calendar-sidebar.tsx",
+      "line": 19,
+      "exported": true
+    },
+    {
+      "name": "ChartConfig",
+      "kind": "type",
+      "file": "src\\components\\ui\\chart.tsx",
+      "line": 9,
+      "exported": true
+    },
+    {
+      "name": "ChatPage",
+      "kind": "function",
+      "file": "src\\app\\(admin)\\chat\\page.tsx",
+      "line": 13,
+      "exported": true
+    },
+    {
+      "name": "checkAdminAccess",
+      "kind": "function",
+      "file": "src\\lib\\admin-guard.ts",
+      "line": 39,
+      "exported": true
+    },
+    {
+      "name": "checkMultipleFeatures",
+      "kind": "function",
+      "file": "src\\lib\\feature-access.ts",
+      "line": 115,
+      "exported": true
+    },
+    {
+      "name": "ClientAnalyticsPage",
+      "kind": "function",
+      "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\analytics\\page.tsx",
+      "line": 14,
+      "exported": true
+    },
+    {
+      "name": "ClientCalendarPage",
+      "kind": "function",
+      "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\calendar\\page.tsx",
+      "line": 14,
+      "exported": true
+    },
+    {
+      "name": "ClientChatPage",
+      "kind": "function",
+      "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\chat\\page.tsx",
+      "line": 13,
+      "exported": true
+    },
+    {
+      "name": "ClientDashboardPage",
+      "kind": "function",
+      "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\dashboard\\page.tsx",
+      "line": 15,
+      "exported": true
+    },
+    {
+      "name": "ClientDetails",
+      "kind": "interface",
+      "file": "src\\features\\admin\\client-actions.ts",
+      "line": 29,
+      "exported": true
+    },
+    {
+      "name": "ClientDetailsPage",
+      "kind": "function",
+      "file": "src\\app\\(admin)\\organizations\\[id]\\page.tsx",
+      "line": 92,
+      "exported": true
+    },
+    {
+      "name": "ClientFinanceiroPage",
+      "kind": "function",
+      "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\financeiro\\page.tsx",
+      "line": 14,
+      "exported": true
+    },
+    {
+      "name": "ClientLayoutWrapper",
+      "kind": "function",
+      "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\client-layout-wrapper.tsx",
+      "line": 28,
+      "exported": true
+    },
+    {
+      "name": "ClientMailPage",
+      "kind": "function",
+      "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\mail\\page.tsx",
+      "line": 13,
+      "exported": true
+    },
+    {
+      "name": "ClientSettingsPage",
+      "kind": "function",
+      "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\settings\\page.tsx",
+      "line": 13,
+      "exported": true
+    },
+    {
+      "name": "ClientsPage",
+      "kind": "function",
+      "file": "src\\app\\(admin)\\organizations\\page.tsx",
+      "line": 63,
+      "exported": true
+    },
+    {
+      "name": "ClientTasksPage",
+      "kind": "function",
+      "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\tasks\\page.tsx",
+      "line": 13,
+      "exported": true
+    },
+    {
+      "name": "ClientUsersPage",
+      "kind": "function",
+      "file": "src\\_disabled-multi-tenant\\(app)\\[tenantId]\\users\\page.tsx",
+      "line": 13,
+      "exported": true
+    }
+  ],
+  "dependencies": {
+    "mostImported": [
+      {
+        "file": "Z:\\dev\\Projects\\pousada-management\\src\\app\\(public)\\forms\\[slug]\\components\\forms\\briefing-cilene-nunes\\types.ts",
+        "importedBy": 21
+      },
+      {
+        "file": "Z:\\dev\\Projects\\pousada-management\\src\\app\\(public)\\forms\\[slug]\\components\\forms\\briefing-cilene-nunes\\ui-components.tsx",
+        "importedBy": 15
+      },
+      {
+        "file": "Z:\\dev\\Projects\\pousada-management\\src\\app\\(admin)\\mail\\data.tsx",
+        "importedBy": 7
+      },
+      {
+        "file": "Z:\\dev\\Projects\\pousada-management\\src\\app\\(admin)\\calendar\\types.ts",
+        "importedBy": 6
+      },
+      {
+        "file": "Z:\\dev\\Projects\\pousada-management\\src\\app\\(admin)\\tasks\\data\\schema.ts",
+        "importedBy": 6
+      },
+      {
+        "file": "Z:\\dev\\Projects\\pousada-management\\src\\app\\(admin)\\chat\\use-chat.ts",
+        "importedBy": 6
+      },
+      {
+        "file": "Z:\\dev\\Projects\\pousada-management\\src\\app\\(public)\\forms\\[slug]\\components\\form-registry.tsx",
+        "importedBy": 4
+      },
+      {
+        "file": "Z:\\dev\\Projects\\pousada-management\\src\\app\\(admin)\\tasks\\data\\data.tsx",
+        "importedBy": 4
+      },
+      {
+        "file": "Z:\\dev\\Projects\\pousada-management\\src\\generated\\prisma\\internal\\prismaNamespace.ts",
+        "importedBy": 3
+      },
+      {
+        "file": "Z:\\dev\\Projects\\pousada-management\\src\\app\\(admin)\\calendar\\data\\events.json",
+        "importedBy": 3
+      },
+      {
+        "file": "Z:\\dev\\Projects\\pousada-management\\src\\app\\(public)\\forms\\[slug]\\components\\forms\\briefing-cilene-nunes\\sortable-list.tsx",
+        "importedBy": 3
+      },
+      {
+        "file": "Z:\\dev\\Projects\\pousada-management\\src\\generated\\prisma\\client.ts",
+        "importedBy": 2
+      },
+      {
+        "file": "Z:\\dev\\Projects\\pousada-management\\src\\generated\\prisma\\enums.ts",
+        "importedBy": 2
+      },
+      {
+        "file": "Z:\\dev\\Projects\\pousada-management\\src\\app\\(admin)\\calendar\\data\\calendars.json",
+        "importedBy": 2
+      },
+      {
+        "file": "Z:\\dev\\Projects\\pousada-management\\src\\components\\theme-customizer\\circular-transition.css",
+        "importedBy": 2
+      },
+      {
+        "file": "Z:\\dev\\Projects\\pousada-management\\src\\app\\(admin)\\mail\\components\\mail.tsx",
+        "importedBy": 2
+      },
+      {
+        "file": "Z:\\dev\\Projects\\pousada-management\\src\\app\\(admin)\\mail\\use-mail.ts",
+        "importedBy": 2
+      },
+      {
+        "file": "Z:\\dev\\Projects\\pousada-management\\src\\app\\(public)\\forms\\[slug]\\components\\forms\\briefing-cilene-nunes\\image-modal.tsx",
+        "importedBy": 2
+      },
+      {
+        "file": "Z:\\dev\\Projects\\pousada-management\\.next\\dev\\types\\routes.d.ts",
+        "importedBy": 1
+      },
+      {
+        "file": "Z:\\dev\\Projects\\pousada-management\\src\\types\\theme.ts",
+        "importedBy": 1
+      }
+    ]
+  },
+  "stats": {
+    "totalSymbols": 577,
+    "exportedSymbols": 338,
+    "analysisTimeMs": 2451
+  }
+}

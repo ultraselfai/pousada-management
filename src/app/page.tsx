@@ -1,24 +1,22 @@
-"use client";
-
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { Navbar } from "@/components/website/navbar";
+import { HeroSection } from "@/components/website/hero-section";
+import { AboutSection } from "@/components/website/about-section";
+import { RoomsSection } from "@/components/website/rooms-section";
+import { FooterOversized } from "@/components/website/footer-oversized";
 
 export default function HomePage() {
-  const router = useRouter();
-
-  useEffect(() => {
-    // Redireciona para login por padrão
-    // O admin-login é privado e só acessível por link direto
-    router.replace("/login");
-  }, [router]);
-
-  // Show a loading state while redirecting
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-        <p className="text-muted-foreground mt-2">Redirecionando...</p>
-      </div>
+    <div className="min-h-screen bg-white">
+      <Navbar />
+      
+      {/* Main Content */}
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <RoomsSection />
+      </main>
+
+      <FooterOversized />
     </div>
   );
 }

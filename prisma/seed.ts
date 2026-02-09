@@ -258,16 +258,196 @@ async function main() {
   console.log("✅ Member sandbox criado (vínculo usuário-organização Decode Lab)");
   console.log(`   Role: owner\n`);
 
+  // 9. Criar usuário Pousada Dois Corações (Solicitado pelo usuário)
+  const pousadaEmail = "pousada@doiscoracoes.com.br";
+  const pousadaPassword = "Senhadapousada@123";
+  const pousadaHashedPassword = await hashPassword(pousadaPassword);
+
+  const pousadaUser = await prisma.user.upsert({
+    where: { email: pousadaEmail },
+    update: {
+      role: "admin",
+    },
+    create: {
+      id: "user-pousada-001",
+      name: "Admin Dois Corações",
+      email: pousadaEmail,
+      emailVerified: true,
+      image: null,
+      role: "admin",
+      banned: false,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+  });
+
+  console.log("✅ Usuário Pousada criado:");
+  console.log(`   Nome: ${pousadaUser.name}`);
+  console.log(`   Email: ${pousadaUser.email}`);
+  console.log(`   ID: ${pousadaUser.id}\n`);
+
+  // 10. Criar account para Pousada
+  await prisma.account.upsert({
+    where: {
+      id: "account-pousada-001",
+    },
+    update: {
+      password: pousadaHashedPassword,
+    },
+    create: {
+      id: "account-pousada-001",
+      userId: pousadaUser.id,
+      accountId: pousadaUser.id,
+      providerId: "credential",
+      password: pousadaHashedPassword,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+  });
+  
+  // 11. Vincular Pousada à organização principal (Decode)
+  await prisma.member.upsert({
+    where: {
+      id: "member-pousada-001",
+    },
+    update: {},
+    create: {
+      id: "member-pousada-001",
+      userId: pousadaUser.id,
+      organizationId: org.id,
+      role: "owner",
+      createdAt: new Date(),
+    },
+  });
+  
+  console.log("✅ Credenciais e Vínculo Pousada criados com sucesso.\n");
+
+  // ==========================================
+  // SEED DA POUSADA DOIS CORAÇÕES
+  // ==========================================
+
+  console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+  console.log("🏨 Iniciando seed da Pousada...\n");
+
+  // Quartos da Pousada
+  const rooms = [
+    { id: "room-suite-01", name: "Suíte 01", category: "STANDARD" as const, maxGuests: 4, basePrice: 250 },
+    { id: "room-suite-02", name: "Suíte 02", category: "STANDARD" as const, maxGuests: 4, basePrice: 250 },
+    { id: "room-suite-03", name: "Suíte 03", category: "LUXO" as const, maxGuests: 5, basePrice: 350 },
+    { id: "room-suite-04", name: "Suíte 04", category: "LUXO" as const, maxGuests: 5, basePrice: 350 },
+    { id: "room-suite-05", name: "Suíte 05", category: "LUXO_SUPERIOR" as const, maxGuests: 6, basePrice: 450 },
+    { id: "room-suite-06", name: "Suíte 06", category: "LUXO_SUPERIOR" as const, maxGuests: 6, basePrice: 450 },
+  ];
+
+  for (const room of rooms) {
+    await prisma.room.upsert({
+      where: { id: room.id },
+      update: {},
+      create: {
+        id: room.id,
+        name: room.name,
+        category: room.category,
+        maxGuests: room.maxGuests,
+        basePrice: room.basePrice,
+        status: "AVAILABLE",
+        description: `${room.name} - Categoria ${room.category.replace("_", " ")}`,
+        bedTypes: [{ type: "casal", qty: 1 }],
+        equipment: ["tv", "ar", "frigobar"],
+        photos: [],
+      },
+    });
+  }
+
+  console.log(`✅ ${rooms.length} Quartos criados`);
+
+  // Categorias de Estoque
+  const stockCategories = [
+    { name: "Café da Manhã", slug: "cafe-da-manha", icon: "☕", color: "#f59e0b" },
+    { name: "Produtos de Piscina", slug: "piscina", icon: "🏊", color: "#06b6d4" },
+    { name: "Produtos de Limpeza", slug: "limpeza", icon: "🧹", color: "#22c55e" },
+    { name: "Equipamentos", slug: "equipamentos", icon: "🔧", color: "#8b5cf6" },
+    { name: "Manutenções", slug: "manutencoes", icon: "🔨", color: "#f97316" },
+  ];
+
+  for (const cat of stockCategories) {
+    await prisma.stockCategory.upsert({
+      where: { slug: cat.slug },
+      update: {},
+      create: cat,
+    });
+  }
+
+  console.log(`✅ ${stockCategories.length} Categorias de estoque criadas`);
+
+  // Categorias de Despesas
+  const expenseCategories = [
+    { name: "Folha Salarial", slug: "folha-salarial", icon: "👷", color: "#3b82f6" },
+    { name: "Despesas Fixas", slug: "despesas-fixas", icon: "🏠", color: "#6366f1" },
+    { name: "Despensa/Estoque", slug: "despensa", icon: "🛒", color: "#f59e0b" },
+    { name: "Equipamentos", slug: "equipamentos", icon: "🔧", color: "#8b5cf6" },
+    { name: "Variáveis", slug: "variaveis", icon: "📊", color: "#ec4899" },
+    { name: "Imprevistos", slug: "imprevistos", icon: "⚠️", color: "#ef4444" },
+    { name: "Manutenções", slug: "manutencoes", icon: "🔨", color: "#f97316" },
+    { name: "Pró-labore", slug: "pro-labore", icon: "💼", color: "#10b981" },
+  ];
+
+  for (const cat of expenseCategories) {
+    await prisma.expenseCategory.upsert({
+      where: { slug: cat.slug },
+      update: {},
+      create: cat,
+    });
+  }
+
+  console.log(`✅ ${expenseCategories.length} Categorias de despesas criadas`);
+
+  // Configurações do Sistema
+  await prisma.systemConfig.upsert({
+    where: { key: "pousada_name" },
+    update: {},
+    create: { key: "pousada_name", value: "Pousada Dois Corações" },
+  });
+
+  await prisma.systemConfig.upsert({
+    where: { key: "pousada_city" },
+    update: {},
+    create: { key: "pousada_city", value: "Olímpia" },
+  });
+
+  await prisma.systemConfig.upsert({
+    where: { key: "pousada_state" },
+    update: {},
+    create: { key: "pousada_state", value: "SP" },
+  });
+
+  await prisma.systemConfig.upsert({
+    where: { key: "check_in_time" },
+    update: {},
+    create: { key: "check_in_time", value: "14:00" },
+  });
+
+  await prisma.systemConfig.upsert({
+    where: { key: "check_out_time" },
+    update: {},
+    create: { key: "check_out_time", value: "11:00" },
+  });
+
+  console.log("✅ Configurações do sistema criadas");
+
+  console.log("\n🏨 Seed da Pousada concluído!\n");
+
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   console.log("🎉 Seed concluído com sucesso!");
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   console.log("\n📋 Credenciais de acesso:\n");
   console.log(`   Admin:   ${adminEmail} / ${adminPassword}`);
+  console.log(`   Pousada: ${pousadaEmail} / ${pousadaPassword}`);
   console.log(`   Sandbox: ${sandboxEmail} / ${sandboxPassword}`);
   console.log("\n   🌐 URLs:");
 
   console.log("      Login: http://localhost:3000/sign-in");
-  console.log("      Org:   http://decode.localhost:3000");
+  console.log("      Overview: http://localhost:3000/overview");
+  console.log("      Mapa: http://localhost:3000/map/reservations");
   console.log("\n");
 }
 

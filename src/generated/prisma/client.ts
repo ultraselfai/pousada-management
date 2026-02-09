@@ -89,3 +89,98 @@ export type Project = Prisma.ProjectModel
  * Submissão de Formulário - Armazena as respostas enviadas
  */
 export type Submission = Prisma.SubmissionModel
+/**
+ * Model Room
+ * Quarto da pousada
+ */
+export type Room = Prisma.RoomModel
+/**
+ * Model Guest
+ * Hóspede cadastrado
+ */
+export type Guest = Prisma.GuestModel
+/**
+ * Model Booking
+ * Reserva de quarto
+ */
+export type Booking = Prisma.BookingModel
+/**
+ * Model Quote
+ * Orçamento para cliente
+ */
+export type Quote = Prisma.QuoteModel
+/**
+ * Model StockCategory
+ * Categoria de estoque
+ */
+export type StockCategory = Prisma.StockCategoryModel
+/**
+ * Model StockItem
+ * Item de estoque
+ */
+export type StockItem = Prisma.StockItemModel
+/**
+ * Model StockPurchase
+ * Compra de estoque
+ */
+export type StockPurchase = Prisma.StockPurchaseModel
+/**
+ * Model StockPurchaseItem
+ * Item de uma compra de estoque
+ */
+export type StockPurchaseItem = Prisma.StockPurchaseItemModel
+/**
+ * Model ExpenseCategory
+ * Categoria de despesa
+ */
+export type ExpenseCategory = Prisma.ExpenseCategoryModel
+/**
+ * Model Expense
+ * Despesa
+ */
+export type Expense = Prisma.ExpenseModel
+/**
+ * Model Revenue
+ * Receita manual
+ */
+export type Revenue = Prisma.RevenueModel
+/**
+ * Model Transaction
+ * Transação financeira (entrada ou saída)
+ */
+export type Transaction = Prisma.TransactionModel
+/**
+ * Model RoomMaintenance
+ * Manutenção/Limpeza de quarto
+ */
+export type RoomMaintenance = Prisma.RoomMaintenanceModel
+/**
+ * Model SystemConfig
+ * Configuração do sistema
+ */
+export type SystemConfig = Prisma.SystemConfigModel
+/**
+ * Model Staff
+ * 
+ */
+export type Staff = Prisma.StaffModel
+/**
+ * Model Shift
+ * 
+ */
+export type Shift = Prisma.ShiftModel
+/**
+ * Model Task
+ * 
+ */
+export type Task = Prisma.TaskModel
+/**
+ * Model ChecklistItem
+ * 
+ */
+export type ChecklistItem = Prisma.ChecklistItemModel
+/**
+ * Model Pool
+ * 
+ */
+export type Pool = Prisma.PoolModel

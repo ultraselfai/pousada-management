@@ -9,7 +9,142 @@
 * 🟢 You can import this file directly.
 */
 
+export const RoomCategory = {
+  STANDARD: 'STANDARD',
+  LUXO: 'LUXO',
+  LUXO_SUPERIOR: 'LUXO_SUPERIOR'
+} as const
+
+export type RoomCategory = (typeof RoomCategory)[keyof typeof RoomCategory]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const RoomStatus = {
+  AVAILABLE: 'AVAILABLE',
+  OCCUPIED: 'OCCUPIED',
+  CLEANING: 'CLEANING',
+  MAINTENANCE: 'MAINTENANCE',
+  BLOCKED: 'BLOCKED'
+} as const
+
+export type RoomStatus = (typeof RoomStatus)[keyof typeof RoomStatus]
+
+
+export const GuestOrigin = {
+  DIRECT: 'DIRECT',
+  BOOKING_COM: 'BOOKING_COM',
+  AIRBNB: 'AIRBNB',
+  WHATSAPP: 'WHATSAPP',
+  INSTAGRAM: 'INSTAGRAM',
+  FACEBOOK: 'FACEBOOK',
+  INDICACAO: 'INDICACAO',
+  MOTOR_RESERVAS: 'MOTOR_RESERVAS',
+  OUTRO: 'OUTRO'
+} as const
+
+export type GuestOrigin = (typeof GuestOrigin)[keyof typeof GuestOrigin]
+
+
+export const PaymentMethod = {
+  PIX: 'PIX',
+  CREDIT_CARD: 'CREDIT_CARD',
+  DEBIT_CARD: 'DEBIT_CARD',
+  CASH: 'CASH',
+  TRANSFER: 'TRANSFER'
+} as const
+
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
+
+
+export const PaymentType = {
+  FULL_UPFRONT: 'FULL_UPFRONT',
+  SPLIT_50_50: 'SPLIT_50_50'
+} as const
+
+export type PaymentType = (typeof PaymentType)[keyof typeof PaymentType]
+
+
+export const BookingStatus = {
+  PRE_BOOKING: 'PRE_BOOKING',
+  CONFIRMED: 'CONFIRMED',
+  CHECKED_IN: 'CHECKED_IN',
+  CHECKED_OUT: 'CHECKED_OUT',
+  CANCELLED: 'CANCELLED',
+  NO_SHOW: 'NO_SHOW'
+} as const
+
+export type BookingStatus = (typeof BookingStatus)[keyof typeof BookingStatus]
+
+
+export const DiscountType = {
+  PERCENTAGE: 'PERCENTAGE',
+  FIXED: 'FIXED'
+} as const
+
+export type DiscountType = (typeof DiscountType)[keyof typeof DiscountType]
+
+
+export const QuoteStatus = {
+  PENDING: 'PENDING',
+  SENT: 'SENT',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED',
+  EXPIRED: 'EXPIRED',
+  CONVERTED: 'CONVERTED'
+} as const
+
+export type QuoteStatus = (typeof QuoteStatus)[keyof typeof QuoteStatus]
+
+
+export const TransactionType = {
+  INCOME: 'INCOME',
+  EXPENSE: 'EXPENSE'
+} as const
+
+export type TransactionType = (typeof TransactionType)[keyof typeof TransactionType]
+
+
+export const RevenueSource = {
+  BOOKING: 'BOOKING',
+  EXTRA_SERVICE: 'EXTRA_SERVICE',
+  PRODUCT_SALE: 'PRODUCT_SALE',
+  OTHER: 'OTHER'
+} as const
+
+export type RevenueSource = (typeof RevenueSource)[keyof typeof RevenueSource]
+
+
+export const Recurrence = {
+  DAILY: 'DAILY',
+  WEEKLY: 'WEEKLY',
+  MONTHLY: 'MONTHLY',
+  YEARLY: 'YEARLY'
+} as const
+
+export type Recurrence = (typeof Recurrence)[keyof typeof Recurrence]
+
+
+export const MaintenanceType = {
+  CLEANING: 'CLEANING',
+  REPAIR: 'REPAIR',
+  INSPECTION: 'INSPECTION'
+} as const
+
+export type MaintenanceType = (typeof MaintenanceType)[keyof typeof MaintenanceType]
+
+
+export const MaintenanceStatus = {
+  PENDING: 'PENDING',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type MaintenanceStatus = (typeof MaintenanceStatus)[keyof typeof MaintenanceStatus]
+
+
+export const MaintenancePriority = {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH'
+} as const
+
+export type MaintenancePriority = (typeof MaintenancePriority)[keyof typeof MaintenancePriority]

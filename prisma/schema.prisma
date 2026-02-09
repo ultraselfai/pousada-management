@@ -48,9 +48,10 @@ model User {
   emailVerified    Boolean      @default(false)
   image            String?
   role             String       @default("user") /// Role do usuário: 'admin' | 'user'
+  permissions      String[]     @default([]) /// Permissões: 'overview', 'management', 'operations', 'financial', 'settings'
   banned           Boolean      @default(false) /// Se o usuário está banido
-  banReason        String?      /// Razão do banimento
-  banExpiresAt     DateTime?    /// Quando o banimento expira
+  banReason        String? /// Razão do banimento
+  banExpiresAt     DateTime? /// Quando o banimento expira
   createdAt        DateTime     @default(now())
   updatedAt        DateTime     @updatedAt
   twoFactorEnabled Boolean?     @default(false)
@@ -75,7 +76,7 @@ model Session {
   userId               String
   user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   activeOrganizationId String?
-  impersonatedBy       String?  /// ID do admin que está impersonando este usuário
+  impersonatedBy       String? /// ID do admin que está impersonando este usuário
 
   @@unique([token])
   @@index([userId])
@@ -189,4 +190,510 @@ model Submission {
 
   @@index([projectId])
   @@map("submissions")
+}
+
+// ============================================
+// MODELOS POUSADA DOIS CORAÇÕES
+// ============================================
+// Sistema completo de gestão para pousada
+
+// -------- ENUMS --------
+
+enum RoomCategory {
+  STANDARD
+  LUXO
+  LUXO_SUPERIOR
+}
+
+enum RoomStatus {
+  AVAILABLE // Disponível
+  OCCUPIED // Ocupado
+  CLEANING // Em limpeza
+  MAINTENANCE // Em manutenção
+  BLOCKED // Bloqueado
+}
+
+enum GuestOrigin {
+  DIRECT // Direto/Telefone
+  BOOKING_COM // Booking.com
+  AIRBNB // Airbnb
+  WHATSAPP // WhatsApp
+  INSTAGRAM // Instagram
+  FACEBOOK // Facebook
+  INDICACAO // Indicação
+  MOTOR_RESERVAS // Motor de Reservas próprio
+  OUTRO // Outro
+}
+
+enum PaymentMethod {
+  PIX
+  CREDIT_CARD
+  DEBIT_CARD
+  CASH
+  TRANSFER
+}
+
+enum PaymentType {
+  FULL_UPFRONT // Integral antecipado
+  SPLIT_50_50 // 50% reserva, 50% check-in
+}
+
+enum BookingStatus {
+  PRE_BOOKING // Pré-reserva (aguardando confirmação)
+  CONFIRMED // Confirmada
+  CHECKED_IN // Check-in realizado
+  CHECKED_OUT // Check-out realizado
+  CANCELLED // Cancelada
+  NO_SHOW // Não compareceu
+}
+
+enum DiscountType {
+  PERCENTAGE
+  FIXED
+}
+
+enum QuoteStatus {
+  PENDING // Pendente
+  SENT // Enviado
+  ACCEPTED // Aceito
+  REJECTED // Rejeitado
+  EXPIRED // Expirado
+  CONVERTED // Convertido em reserva
+}
+
+enum TransactionType {
+  INCOME // Entrada
+  EXPENSE // Saída
+}
+
+enum RevenueSource {
+  BOOKING // Reserva
+  EXTRA_SERVICE // Serviço extra
+  PRODUCT_SALE // Venda de produto
+  OTHER // Outro
+}
+
+enum Recurrence {
+  DAILY
+  WEEKLY
+  MONTHLY
+  YEARLY
+}
+
+enum MaintenanceType {
+  CLEANING // Limpeza pós check-out
+  REPAIR // Reparo
+  INSPECTION // Inspeção
+}
+
+enum MaintenanceStatus {
+  PENDING // Pendente
+  IN_PROGRESS // Em andamento
+  COMPLETED // Concluído
+}
+
+enum MaintenancePriority {
+  LOW // Baixa
+  MEDIUM // Média
+  HIGH // Alta
+}
+
+// -------- QUARTOS --------
+
+/// Quarto da pousada
+model Room {
+  id          String       @id @default(cuid())
+  name        String /// Nome do quarto (ex: "Apto 01")
+  category    RoomCategory
+  bedTypes    Json /// [{type: "casal", qty: 1}, {type: "solteiro", qty: 2}]
+  hasBathroom Boolean      @default(true)
+  equipment   Json /// ["tv", "ar", "frigobar"]
+  photos      String[] /// URLs das fotos no R2
+  basePrice   Decimal      @db.Decimal(10, 2)
+  status      RoomStatus   @default(AVAILABLE)
+  description String?      @db.Text
+  maxGuests   Int          @default(2)
+
+  bookings     Booking[]
+  maintenances RoomMaintenance[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("rooms")
+}
+
+// -------- HÓSPEDES --------
+
+/// Hóspede cadastrado
+model Guest {
+  id        String      @id @default(cuid())
+  name      String
+  cpf       String      @unique
+  email     String?
+  phone     String
+  birthDate DateTime? /// Data de nascimento
+  origin    GuestOrigin @default(DIRECT)
+  notes     String?     @db.Text
+
+  bookings Booking[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("guests")
+}
+
+// -------- RESERVAS --------
+
+/// Reserva de quarto
+model Booking {
+  id            String @id @default(cuid())
+  bookingNumber String @unique /// Número único (ex: "RES-2026-0001")
+
+  guest   Guest  @relation(fields: [guestId], references: [id])
+  guestId String
+  room    Room   @relation(fields: [roomId], references: [id])
+  roomId  String
+
+  checkIn  DateTime
+  checkOut DateTime
+  adults   Int      @default(1)
+  children Int      @default(0)
+
+  mealsIncluded Boolean @default(true)
+
+  paymentMethod PaymentMethod
+  paymentType   PaymentType
+  totalAmount   Decimal       @db.Decimal(10, 2)
+  paidAmount    Decimal       @default(0) @db.Decimal(10, 2)
+
+  status BookingStatus @default(PRE_BOOKING)
+
+  notes String? @db.Text
+
+  transactions Transaction[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([checkIn, checkOut])
+  @@index([status])
+  @@index([guestId])
+  @@index([roomId])
+  @@map("bookings")
+}
+
+// -------- ORÇAMENTOS --------
+
+/// Orçamento para cliente
+model Quote {
+  id          String @id @default(cuid())
+  quoteNumber String @unique /// Número único (ex: "ORC-2026-0001")
+
+  guestName  String
+  guestPhone String?
+  guestEmail String?
+
+  roomId   String?
+  roomName String
+
+  checkIn  DateTime
+  checkOut DateTime
+  adults   Int
+  children Int
+
+  basePrice    Decimal      @db.Decimal(10, 2)
+  discount     Decimal      @default(0) @db.Decimal(10, 2)
+  discountType DiscountType @default(PERCENTAGE)
+  extras       Json? /// [{name: "Cama extra", price: 50}]
+  totalPrice   Decimal      @db.Decimal(10, 2)
+
+  status     QuoteStatus @default(PENDING)
+  validUntil DateTime
+  pdfUrl     String?
+
+  notes String? @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("quotes")
+}
+
+// -------- ESTOQUE --------
+
+/// Categoria de estoque
+model StockCategory {
+  id    String  @id @default(cuid())
+  name  String  @unique
+  slug  String  @unique
+  icon  String?
+  color String?
+
+  items StockItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("stock_categories")
+}
+
+/// Item de estoque
+model StockItem {
+  id         String        @id @default(cuid())
+  name       String
+  category   StockCategory @relation(fields: [categoryId], references: [id])
+  categoryId String
+
+  unit         String  @default("un") /// Unidade: un, kg, L, etc
+  currentStock Decimal @db.Decimal(10, 2)
+  minimumStock Decimal @db.Decimal(10, 2)
+
+  purchases StockPurchaseItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([categoryId])
+  @@map("stock_items")
+}
+
+/// Compra de estoque
+model StockPurchase {
+  id           String   @id @default(cuid())
+  purchaseDate DateTime
+  supplier     String?
+  totalAmount  Decimal  @db.Decimal(10, 2)
+  receiptUrl   String? /// Comprovante no R2
+  notes        String?
+
+  items       StockPurchaseItem[]
+  transaction Transaction?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("stock_purchases")
+}
+
+/// Item de uma compra de estoque
+model StockPurchaseItem {
+  id         String        @id @default(cuid())
+  purchase   StockPurchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+  purchaseId String
+  item       StockItem     @relation(fields: [itemId], references: [id])
+  itemId     String
+
+  quantity   Decimal @db.Decimal(10, 2)
+  unitPrice  Decimal @db.Decimal(10, 2)
+  totalPrice Decimal @db.Decimal(10, 2)
+
+  @@map("stock_purchase_items")
+}
+
+// -------- FINANCEIRO --------
+
+/// Categoria de despesa
+model ExpenseCategory {
+  id    String  @id @default(cuid())
+  name  String  @unique
+  slug  String  @unique
+  color String?
+  icon  String?
+
+  expenses Expense[]
+
+  createdAt DateTime @default(now())
+
+  @@map("expense_categories")
+}
+
+/// Despesa
+model Expense {
+  id          String          @id @default(cuid())
+  description String
+  category    ExpenseCategory @relation(fields: [categoryId], references: [id])
+  categoryId  String
+
+  amount  Decimal   @db.Decimal(10, 2)
+  dueDate DateTime
+  paidAt  DateTime?
+  isPaid  Boolean   @default(false)
+
+  isRecurring Boolean     @default(false)
+  recurrence  Recurrence?
+
+  receiptUrl String?
+  notes      String?
+
+  transaction Transaction?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([dueDate])
+  @@index([categoryId])
+  @@map("expenses")
+}
+
+/// Receita manual
+model Revenue {
+  id          String        @id @default(cuid())
+  description String
+  source      RevenueSource
+
+  amount     Decimal  @db.Decimal(10, 2)
+  receivedAt DateTime
+
+  bookingId String?
+  notes     String?
+
+  transaction Transaction?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("revenues")
+}
+
+/// Transação financeira (entrada ou saída)
+model Transaction {
+  id          String          @id @default(cuid())
+  type        TransactionType
+  amount      Decimal         @db.Decimal(10, 2)
+  date        DateTime
+  description String
+
+  // Relacionamentos opcionais (apenas um será preenchido)
+  booking    Booking?       @relation(fields: [bookingId], references: [id])
+  bookingId  String?        @unique
+  expense    Expense?       @relation(fields: [expenseId], references: [id])
+  expenseId  String?        @unique
+  revenue    Revenue?       @relation(fields: [revenueId], references: [id])
+  revenueId  String?        @unique
+  purchase   StockPurchase? @relation(fields: [purchaseId], references: [id])
+  purchaseId String?        @unique
+
+  createdAt DateTime @default(now())
+
+  @@index([date])
+  @@index([type])
+  @@map("transactions")
+}
+
+// -------- MANUTENÇÃO --------
+
+/// Manutenção/Limpeza de quarto
+model RoomMaintenance {
+  id     String @id @default(cuid())
+  room   Room   @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  roomId String
+
+  type        MaintenanceType
+  status      MaintenanceStatus   @default(PENDING)
+  priority    MaintenancePriority @default(MEDIUM)
+  description String?
+  assignedTo  String? /// Nome do responsável pela manutenção
+
+  startedAt   DateTime?
+  completedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([roomId])
+  @@index([status])
+  @@map("room_maintenances")
+}
+
+// -------- CONFIGURAÇÕES --------
+
+/// Configuração do sistema
+model SystemConfig {
+  id    String @id @default(cuid())
+  key   String @unique
+  value Json
+
+  updatedAt DateTime @updatedAt
+
+  @@map("system_configs")
+}
+
+// --- Módulo de Equipe e Tarefas ---
+
+model Staff {
+  id        String   @id @default(cuid())
+  name      String
+  role      String // Ex: Gerente, Camareira, Ajudante Geral
+  color     String? // Para identificação visual no calendário
+  email     String? // Opcional: contato
+  phone     String? // Opcional: contato
+  shifts    Shift[]
+  tasks     Task[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("staff")
+}
+
+model Shift {
+  id        String   @id @default(cuid())
+  staffId   String
+  staff     Staff    @relation(fields: [staffId], references: [id], onDelete: Cascade)
+  date      DateTime // Data do turno (apenas dia/mês/ano relevantes)
+  startTime String // Ex: "08:00"
+  endTime   String // Ex: "17:00"
+  isDayOff  Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([staffId, date]) // Um turno por pessoa por dia
+  @@map("shifts")
+}
+
+model Task {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  date        DateTime // Para qual dia é a tarefa
+  startTime   String?
+  endTime     String?
+  completed   Boolean   @default(false)
+  completedAt DateTime?
+
+  staffId String?
+  staff   Staff?  @relation(fields: [staffId], references: [id])
+
+  // Vínculos opcionais para automação
+  roomId String?
+  poolId String?
+
+  checklist ChecklistItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("tasks")
+}
+
+model ChecklistItem {
+  id      String  @id @default(cuid())
+  text    String
+  checked Boolean @default(false)
+  taskId  String
+  task    Task    @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@map("checklist_items")
+}
+
+model Pool {
+  id        String   @id @default(cuid())
+  name      String
+  status    String   @default("AVAILABLE") // AVAILABLE, MAINTENANCE, CLEANING, CLOSED
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("pools")
 }

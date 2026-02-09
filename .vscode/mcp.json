@@ -59,6 +59,15 @@
 			"env": {
 				"GEMINI_API_KEY": "AIzaSyBnir_6Bzl6gwMt1UHDpRCQEx1rBrb6NL4"
 			}
+		},
+		"ai-context": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"@ai-coders/context",
+				"mcp"
+			],
+			"env": {}
 		}
 	},
 	"inputs": [

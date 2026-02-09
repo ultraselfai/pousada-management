@@ -1,21 +1,21 @@
 "use client"
-
 import * as React from "react"
+import { useSession } from "@/lib/auth-client"
 import {
-  LayoutPanelLeft,
   LayoutDashboard,
-  Mail,
-  CheckSquare,
-  MessageCircle,
-  Calendar,
-  Shield,
-  AlertTriangle,
-  Settings,
-  HelpCircle,
-  CreditCard,
-  LayoutTemplate,
+  CalendarDays,
   Users,
-  Building2,
+  BookOpen,
+  Package,
+  DollarSign,
+  Settings,
+  BedDouble,
+  FileText,
+  Map,
+  Wrench,
+  Heart,
+  TrendingUp,
+  TrendingDown,
 } from "lucide-react"
 import Link from "next/link"
 import { Logo } from "@/components/logo"
@@ -34,170 +34,131 @@ import {
 
 const data = {
   user: {
-    name: "Decode",
-    email: "console@decode.ink",
+    name: "Pousada",
+    email: "contato@pousadadoiscorações.com.br",
     avatar: "",
   },
   navGroups: [
     {
-      label: "Gestão",
+      label: "Visão Geral",
       items: [
         {
-          title: "Dashboard",
-          url: "/dashboard",
+          title: "Visão do Dia",
+          url: "/overview",
           icon: LayoutDashboard,
         },
         {
-          title: "Clientes",
-          url: "/organizations",
-          icon: Building2,
+          title: "Mapa de Reservas",
+          url: "/map/reservations",
+          icon: Map,
         },
       ],
     },
     {
-      label: "Apps",
+      label: "Gestão",
       items: [
         {
-          title: "Mail",
-          url: "/mail",
-          icon: Mail,
+          title: "Hóspedes",
+          url: "/guests",
+          icon: Users,
         },
         {
-          title: "Tasks",
-          url: "/tasks",
-          icon: CheckSquare,
+          title: "Reservas",
+          url: "/bookings",
+          icon: BookOpen,
         },
         {
-          title: "Chat",
-          url: "/chat",
-          icon: MessageCircle,
-        },
-        {
-          title: "Calendar",
-          url: "/calendar",
-          icon: Calendar,
+          title: "Orçamentos",
+          url: "#",
+          icon: FileText,
+          items: [
+            {
+              title: "Todos",
+              url: "/quotes",
+            },
+            {
+              title: "Novo Orçamento",
+              url: "/quotes/new",
+            },
+          ],
         },
       ],
     },
     {
-      label: "Pages",
+      label: "Operações",
       items: [
         {
-          title: "Landing",
-          url: "/landing",
-          target: "_blank",
-          icon: LayoutTemplate,
+          title: "Quartos",
+          url: "/rooms",
+          icon: BedDouble,
         },
         {
-          title: "Auth Pages",
-          url: "#",
-          icon: Shield,
-          items: [
-            {
-              title: "Sign In 1",
-              url: "/sign-in",
-            },
-            {
-              title: "Sign In 2",
-              url: "/sign-in-2",
-            },
-            {
-              title: "Sign In 3",
-              url: "/sign-in-3",
-            },
-            {
-              title: "Sign Up 1",
-              url: "/sign-up",
-            },
-            {
-              title: "Sign Up 2",
-              url: "/sign-up-2",
-            },
-            {
-              title: "Sign Up 3",
-              url: "/sign-up-3",
-            },
-            {
-              title: "Forgot Password 1",
-              url: "/forgot-password",
-            },
-            {
-              title: "Forgot Password 2",
-              url: "/forgot-password-2",
-            },
-            {
-              title: "Forgot Password 3",
-              url: "/forgot-password-3",
-            }
-          ],
+          title: "Estoque",
+          url: "/stock",
+          icon: Package,
         },
         {
-          title: "Errors",
-          url: "#",
-          icon: AlertTriangle,
-          items: [
-            {
-              title: "Unauthorized",
-              url: "/errors/unauthorized",
-            },
-            {
-              title: "Forbidden",
-              url: "/errors/forbidden",
-            },
-            {
-              title: "Not Found",
-              url: "/errors/not-found",
-            },
-            {
-              title: "Internal Server Error",
-              url: "/errors/internal-server-error",
-            },
-            {
-              title: "Under Maintenance",
-              url: "/errors/under-maintenance",
-            },
-          ],
+          title: "Manutenções",
+          url: "/maintenance",
+          icon: Wrench,
+        },
+      ],
+    },
+    {
+      label: "Financeiro",
+      items: [
+        {
+          title: "Visão Geral",
+          url: "/financial",
+          icon: LayoutDashboard,
         },
         {
-          title: "Settings",
+          title: "Despesas",
+          url: "/financial/expenses",
+          icon: TrendingDown,
+        },
+        {
+          title: "Receitas",
+          url: "/financial/revenues",
+          icon: TrendingUp,
+        },
+        {
+          title: "Extrato",
+          url: "/financial/statement",
+          icon: FileText,
+        },
+        {
+          title: "DRE",
+          url: "/financial/dre", // Atualizado para rota unificada se houver
+          icon: FileText,
+        },
+      ],
+    },
+    {
+      label: "Configurações",
+      items: [
+        {
+          title: "Configurações",
           url: "#",
           icon: Settings,
           items: [
             {
-              title: "User Settings",
+              title: "Perfil",
+              url: "/settings/profile",
+            },
+            {
+              title: "Usuários & Permissões",
               url: "/settings/user",
             },
             {
-              title: "Account Settings",
+              title: "Conta",
               url: "/settings/account",
             },
             {
-              title: "Plans & Billing",
-              url: "/settings/billing",
-            },
-            {
-              title: "Appearance",
+              title: "Aparência",
               url: "/settings/appearance",
             },
-            {
-              title: "Notifications",
-              url: "/settings/notifications",
-            },
-            {
-              title: "Connections",
-              url: "/settings/connections",
-            },
           ],
-        },
-        {
-          title: "FAQs",
-          url: "/faqs",
-          icon: HelpCircle,
-        },
-        {
-          title: "Pricing",
-          url: "/pricing",
-          icon: CreditCard,
         },
       ],
     },
@@ -205,19 +166,63 @@ const data = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { data: session } = useSession()
+  const user = session?.user
+
+  // Map permissions to labels matches
+  // 'overview' -> "Visão Geral"
+  // 'management' -> "Gestão"
+  // 'operations' -> "Operações"
+  // 'financial' -> "Financeiro"
+  // 'settings' -> "Configurações"
+
+  const filteredNavGroups = React.useMemo(() => {
+    if (!user) return [] // Or default public items? usually login required.
+
+    // If admin or owner, show all
+    if (user.role === "admin" || user.role === "owner") return data.navGroups
+
+    const userPermissions = (user as any).permissions || []
+
+    return data.navGroups.filter(group => {
+      // Mapping
+      let requiredPermission = ""
+      if (group.label === "Visão Geral") requiredPermission = "overview"
+      else if (group.label === "Gestão") requiredPermission = "management"
+      else if (group.label === "Operações") requiredPermission = "operations"
+      else if (group.label === "Financeiro") requiredPermission = "financial"
+      else if (group.label === "Configurações") requiredPermission = "settings"
+      
+      // If no mapping matched (e.g. unknown group), maybe show it or hide it. 
+      // Safest is to hide if it matches a restricted category label. 
+      // If it doesn't match any known restricted category, we could show it (e.g. "Public").
+      // But here we mapped all standard groups.
+      
+      if (!requiredPermission) return true 
+
+      return userPermissions.includes(requiredPermission)
+    })
+  }, [user])
+
+  // Update Settings links dynamically if needed, or just static update in 'data' object below
+  
   return (
     <Sidebar {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <Link href="/dashboard">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                  <Logo size={24} className="text-current" />
+              <Link href="/overview">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg overflow-hidden">
+                  <img 
+                    src="/form-step-7/favicon.png" 
+                    alt="Logo Pousada Dois Corações" 
+                    className="size-8 object-contain"
+                  />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">Decode</span>
-                  <span className="truncate text-xs">Admin Console</span>
+                  <span className="truncate font-medium">Pousada</span>
+                  <span className="truncate text-xs">Dois Corações</span>
                 </div>
               </Link>
             </SidebarMenuButton>
@@ -225,12 +230,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        {data.navGroups.map((group) => (
+        {filteredNavGroups.map((group) => (
           <NavMain key={group.label} label={group.label} items={group.items} />
         ))}
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} logoutRedirect="/admin-login" />
+        <NavUser 
+          user={user ? {
+            name: user.name,
+            email: user.email,
+            avatar: user.image || "",
+          } : data.user} 
+          logoutRedirect="/admin-login" 
+        />
       </SidebarFooter>
     </Sidebar>
   )

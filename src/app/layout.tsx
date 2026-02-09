@@ -7,8 +7,11 @@ import { inter } from "@/lib/fonts";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
-  title: "Shadcn Dashboard",
-  description: "A dashboard built with Next.js and shadcn/ui",
+  title: "Admin Dois Corações",
+  description: "Sistema de gestão da Pousada Dois Corações",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
