@@ -30,11 +30,7 @@ export const auth = betterAuth({
 
   user: {
     additionalFields: {
-      permissions: {
-        type: "string[]",
-        required: false,
-        defaultValue: []
-      }
+      // permissions removed to let Prisma handle the default String[]
     }
   },
 
