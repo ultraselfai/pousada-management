@@ -16,7 +16,7 @@ export async function GET(request: Request) {
     step: "init",
     userExists: false,
     accountExists: false,
-    actionsTaken: [],
+    actionsTaken: [] as string[],
     errors: [] as any[],
     finalStatus: "unknown"
   };
